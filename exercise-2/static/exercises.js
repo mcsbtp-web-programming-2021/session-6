@@ -13,21 +13,6 @@ let currentUser = 'pepe';
   *          </div>
   */
 const addTweetToTimeline = (user, tweet) => {
-    let tweetDiv = document.createElement("div");
-    tweetDiv.classList.add("tweet");
-    let profileImg = document.createElement("img");
-    profileImg.classList.add("profile-img");
-    profileImg.setAttribute("src", `static/${user}.jpg`)
-    tweetDiv.appendChild(profileImg);
-    let usernameDiv = document.createElement("div");
-    usernameDiv.innerHTML = `@${user}`;
-    usernameDiv.classList.add("username");
-    tweetDiv.appendChild(usernameDiv);
-    let textDiv = document.createElement("div");
-    textDiv.classList.add("txt");
-    textDiv.innerHTML = tweet;
-    tweetDiv.appendChild(textDiv);
-    document.querySelector(".timeline").prepend(tweetDiv);
 };
 
 
@@ -41,14 +26,6 @@ const addTweetToTimeline = (user, tweet) => {
  * function
  */
 const getTimeline = (user) => {
-  return fetch(`http://localhost:5000/timeline/${user}`)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      data.forEach(element => {
-        addTweetToTimeline(element.user, element.tweet);
-      });
-    })
 };
 
 
@@ -65,27 +42,8 @@ const getTimeline = (user) => {
  * Create also a listener that calls that function when the button is clicked
  */
 const createTweet = (usr, twt) => {
-  return fetch(
-    "http://localhost:5000/tweet", {
-      method: "POST",
-      body: JSON.stringify({user: usr, tweet: twt}),
-      headers: {"Content-Type": "application/json"}
-    })
 };
 
-let button = document.querySelector('#create-tweet')
-
-const tweet = () => {
-    document.querySelector('.timeline').innerHTML = '';
-    let text = document.querySelector('#tweet').value;
-    createTweet(currentUser, text)
-        .then(response => getTimeline('pepe'));
-}
-
-button.addEventListener('click', tweet)
-
-// call getTimeline when the script loads
-getTimeline('pepe')
 
 /**
  * Exercise 4
@@ -94,5 +52,4 @@ getTimeline('pepe')
  * the /user/<follower>/follow/<followee> with the POST method
  */
 const follow = (follower, followee) =>  {
-  fetch(`http://localhost:5000/user/${follower}/follow/${followee}`, {method: "POST"})
 };
