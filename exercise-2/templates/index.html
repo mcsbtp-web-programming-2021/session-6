@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>tweeter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="main">
+        <header>
+            <h1>tweeter</h1>
+        </header>
+        <div class="sidebar">
+            <input id="tweet" placeholder="tweet something...">
+            <button id="create-tweet">tweet</button>
+        </div>
+        <div class="timeline">
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='exercises.js') }}"></script>
+</body>
+</html>
